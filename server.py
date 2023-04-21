@@ -6,10 +6,12 @@ app.secret_key = '123456'
 
 @app.route('/')
 def home():
-    if 'visits' in session:
-        session['visits'] += 1
+    if 'count' not in session:
+        session['count'] = 0
+    if 'visits' not in session:
+        session['visits'] = 1
     else:
-        session['visits'] = 0
+        session['visits'] += 1
     return render_template('check.html')
 
 @app.route('/clear')
@@ -20,9 +22,11 @@ def reset():
 @app.route('/', methods = ['POST'])
 def increment_by_two():
     if 'plus_two_btn' in request.form:
-        session['visits'] += 1
+        session['count'] += int(request.form['number'])
     if 'clear_btn' in request.form:
-        session.clear()
+        # session.clear()		# clears all keys
+        session.pop('count')		# clears a specific key
+
     return redirect('/')
         
 

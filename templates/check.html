@@ -11,13 +11,16 @@
 <body>
     <div class="container mt-3 text-center">
         <h1>Counter</h1>
-        <h2>{{ session['visits'] }}</h2>
-        <div class="flex justify-content-around">
+        <h2>{{ session['count'] }}</h2>
+        <div class="flex justify-content-around row">
             <form action = "/" method="post">
-                <button type="submit" class="btn btn-primary btn-sm" name="plus_two_btn" value="plus_two">+2 up!</button>
+                <label for="number">Enter number:</label>
+                <input class="form-control col-xs-2 text-right" type="text" name="number" value="0">
+                <button type="submit" class="btn btn-primary btn-sm" name="plus_two_btn" value="plus_two">Let's up!</button>
                 <button type="submit" class="btn btn-danger btn-sm" name="clear_btn" value="clear_session">Clear</button>
             </form>
         </div>
+        <p>Actual number of visits: {{ session['visits'] }} </p>
     </div>
 </body>
 </html>
